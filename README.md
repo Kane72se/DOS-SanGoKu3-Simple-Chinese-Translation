@@ -8,12 +8,14 @@
 - 简体化采用「字模替换」方案：不改游戏文本编码、不改程序代码，只重建 `HAN.16P` 字库中的 16×14 点阵字形。游戏仍以 BIG5 读取文本，但显示的是简体字形。
 - 字库共 1335 个槽位 × 28 字节（16×14 点阵），已全部完成槽位→汉字映射（`槽位映射表v22.tsv`，无未知槽位）。
 - 修改器基于 Python 3 + tkinter，可编辑武将能力/兵力/宝物/忠诚/寿命等隐藏属性，以及城市数值（人口、金、军粮、开发、商业等），支持剧本同步。
+- 附带 16:10 去黑边方案：DOSBox-X 用 GLSL shader 裁掉上下黑边；86Box/真机用原生 VPT TSR 输出真正的 640×400 表面（详见 `16x10去黑边方案/README.md`）。
 
 **English**: This project localizes the DOS version of *Romance of the Three Kingdoms III* (KOEI, Traditional Chinese release) to Simplified Chinese, and ships with a full-featured save/scenario editor.
 
 - The localization uses **glyph replacement**: game text encoding and program code are untouched; only the 16×14 dot-matrix glyphs inside `HAN.16P` are rebuilt. The game still reads BIG5 text, but displays Simplified glyphs.
 - The font contains 1335 slots × 28 bytes (16×14). The complete slot→character map is provided (`槽位映射表v22.tsv`, zero unknown slots).
 - The editor is Python 3 + tkinter, supporting officer abilities/troops/items/loyalty/lifespan (hidden stats), plus city data (population, gold, food, development, commerce, etc.), with scenario sync.
+- Ships a 16:10 no-black-bar solution: a GLSL shader for DOSBox-X, and a hook-free VPT TSR that makes 86Box/real-DOS output a true 640×400 surface (see `16x10去黑边方案/README.md`).
 
 ---
 
@@ -21,11 +23,6 @@
 
 ```
 ├─ README.md                                  本说明（中英双语）
-├─ san3_简体化_第一阶段/                     第一阶段成果（HAN.16P 示例 + 主菜单对比截图）
-│   ├─ HAN.16P                               繁体原版字库（备份参考）
-│   ├─ 主菜单_繁体原版.png
-│   ├─ 主菜单_简体化后.png
-│   └─ 说明.md
 ├─ san3_简体化_全量逆向/                     全量简体化最终成果（推荐使用 v22）
 │   ├─ HAN.16P_全量v22版                      ★ 最终字库：直接替换游戏目录 HAN.16P
 │   ├─ 槽位映射表v22.tsv                     ★ 1335 槽位 → 汉字 全量映射（0 未知）
@@ -42,6 +39,10 @@
 │   ├─ han_map_v20.tsv                       槽位→汉字映射（修改器显示/搜索用）
 │   ├─ 宝物列表.txt                          宝物 ID→名称（可自行编辑）
 │   └─ 使用说明.txt
+├─ 16x10去黑边方案/                          ★ 16:10 去黑边（方案-DosBox / 方案-DOS）
+│   ├─ README.md                             方案总结与技术调查结论
+│   ├─ 方案-DosBox/                          DOSBox-X：GLSL shader 裁剪黑边
+│   └─ 方案-DOS/                             86Box/真机：原生 640×400 VPT TSR
 ├─ 三国志3武将列表_简体对照v4.xlsx           武将名/能力对照表（含简繁对照列）
 └─ 武将名简体化_思路与基础数据.md            武将名字体化定位思路与数据说明
 ```
@@ -64,6 +65,24 @@
 
 > 只替换字形，不改文本字节，因此**旧存档可正常读取**，且不影响 NBDATA.DAT（武将名数据）、NAME.16P 或图片内嵌字。
 > Only glyphs are replaced; text bytes are unchanged, so **existing saves load fine**, and NBDATA.DAT (officer names), NAME.16P, and bitmap-embedded text are unaffected.
+
+---
+
+## 16:10 去黑边 / 16:10 No-Black-Bar
+
+**中文**：游戏内容实际是 640×400，却被放在 640×480（VGA 模式 12h）里，上下各有 40px 黑边。仓库提供两套方案（目录 `16x10去黑边方案/`）：
+
+- **方案-DosBox（方案 A，GLSL shader）**——用于 DOSBox-X。把 `方案-DosBox/` 里的 `san3-16x10.dosbox-x.conf` 与 `san3_crop2.glsl` 放在同一目录，用 DOSBox-X 加载该 conf（或建桌面快捷方式）即可：游戏画面 16:10 无黑边、密码输入界面保持 4:3、窗口可任意缩放。
+- **方案-DOS（方案 B，VPT TSR）**——用于 86Box / 真机 DOS。把 `方案-DOS/SAN3V16.COM` 放进游戏目录（86Box 测试时为 `C:\SAN3`），在 DOS 提示符下先运行 `SAN3V16` 再 `PLAY`：游戏从片头起就是原生 640×400 16:10 表面，零钩子、无需按键。密码界面左上角文字会被裁掉（假输入，回车即过）。
+
+机制说明、各环境适用性结论与完整踩坑记录见 `16x10去黑边方案/README.md`。
+
+**English**: The game content is actually 640×400 inside a 640×480 (VGA mode 12h) frame, with 40px black bars top and bottom. Two solutions are provided under `16x10去黑边方案/`:
+
+- **Plan-DosBox (Plan A, GLSL shader)** — for DOSBox-X. Keep `san3-16x10.dosbox-x.conf` and `san3_crop2.glsl` in the same folder and launch DOSBox-X with the conf: 16:10 no-black-bar gameplay, 4:3 password screen, freely resizable window.
+- **Plan-DOS (Plan B, VPT TSR)** — for 86Box / real DOS. Copy `SAN3V16.COM` into the game folder (e.g. `C:\SAN3` in the 86Box test), then run `SAN3V16` followed by `PLAY` at the DOS prompt: the game outputs a native 640×400 16:10 surface from the intro onward, hook-free, no keypress needed. The password screen's top-left text is cropped (fake input; Enter skips it).
+
+See `16x10去黑边方案/README.md` for the mechanism, per-environment conclusions, and the full list of pitfalls investigated.
 
 ---
 

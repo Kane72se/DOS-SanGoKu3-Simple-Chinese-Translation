@@ -12,7 +12,7 @@
 
 ## 2. 方案 A：GLSL shader 裁剪（用于 DOSBox-X）
 
-**文件**：`方案A/san3-16x10.dosbox-x.conf` + `方案A/san3_crop2.glsl`
+**文件**：`方案-DosBox/san3-16x10.dosbox-x.conf` + `方案-DosBox/san3_crop2.glsl`
 
 **机制**：逐帧识别画面，裁掉上下各 40px 黑边，按 16:10 像素完美整数缩放
 显示；密码输入界面自动保持 640×480 4:3 居中。
@@ -23,7 +23,7 @@
 
 ## 3. 方案 B：原生 640×400 表面 TSR（用于 86Box / 真 DOS）
 
-**文件**：`方案B/SAN3V16.COM`（1933 字节，纯 VPT 版，SHA-256
+**文件**：`方案-DOS/SAN3V16.COM`（1933 字节，纯 VPT 版，SHA-256
 `77188ca990bb8b09…`）
 
 **机制**：驻留时把 BIOS 视频参数表指针（BDA `0040:00A8`）指向内置的补丁表
@@ -75,9 +75,9 @@ C:\SAN3> play
 
 ## 6. 交付文件
 
-- `方案A/`：`san3-16x10.dosbox-x.conf`、`san3_crop2.glsl`、
+- `方案-DosBox/`（方案 A）：`san3-16x10.dosbox-x.conf`、`san3_crop2.glsl`、
   `README-三国志3-16x10.txt`
-- `方案B/`：`SAN3V16.COM`（纯 VPT 版）
+- `方案-DOS/`（方案 B）：`SAN3V16.COM`（纯 VPT 版）
 - 86Box 镜像（`HDD.img`）中 `C:\SAN3\SAN3V16.COM` 即为本文件；改动前完整
   备份保存在本地工作区（哈希一致），如需回滚可覆盖还原。
 
