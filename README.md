@@ -1,6 +1,8 @@
 # DOS 三国志3 繁体中文 → 简体中文 字库替换 + 存档/剧本修改器
 # DOS Romance of the Three Kingdoms III (SanGoKu3) Traditional→Simplified Chinese Font Patch & Save/Scenario Editor
 
+![test0000](test0000.jpg)
+
 ## 项目简介 / Overview
 
 **中文**：本项目针对 DOS 版《三国志3》（光荣 KOEI，繁体中文版）做简体化处理，并附带一个功能完整的存档/剧本修改器。
