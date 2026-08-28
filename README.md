@@ -45,6 +45,11 @@
 │   ├─ README.md                             方案总结与技术调查结论
 │   ├─ 方案-DosBox/                          DOSBox-X：GLSL shader 裁剪黑边
 │   └─ 方案-DOS/                             86Box/真机：原生 640×400 VPT TSR
+├─ 三国志3_GRPDATA图形解析/                  ★ GRPDATA.DAT 界面图形解码
+│   ├─ README.md                             文件格式说明（结构/压缩/调色板）
+│   ├─ decode_grpdata.py                     解码脚本（KOEI NPK 式压缩）
+│   ├─ grpdata_all_frames.png                全部图形总览
+│   └─ 渲染图/                               7 张帧图（4 倍放大）
 ├─ 三国志3武将列表_简体对照v4.xlsx           武将名/能力对照表（含简繁对照列）
 └─ 武将名简体化_思路与基础数据.md            武将名字体化定位思路与数据说明
 ```
@@ -78,6 +83,14 @@
 - **方案-DOS（方案 B，VPT TSR）**——用于 86Box / 真机 DOS。把 `方案-DOS/SAN3V16.COM` 放进游戏目录（86Box 测试时为 `C:\SAN3`），在 DOS 提示符下先运行 `SAN3V16` 再 `PLAY`：游戏从片头起就是原生 640×400 16:10 表面，零钩子、无需按键。密码界面左上角文字会被裁掉（假输入，回车即过）。
 
 机制说明、各环境适用性结论与完整踩坑记录见 `16x10去黑边方案/README.md`。
+
+---
+
+## GRPDATA.DAT 图形解析 / GRPDATA.DAT Graphics
+
+**中文**：`GRPDATA.DAT` 是游戏界面窗口图形（消息框/对话框边框），由 `MAIN.EXE` 加载。目录 `三国志3_GRPDATA图形解析/` 提供了完整解码：6 张 80×112 窗口框变体 + 1 张 112×400 全高框，KOEI NPK 式压缩、8 色调色板（已与游戏截图核对），含解码脚本、格式说明与全部渲染图。
+
+**English**: `GRPDATA.DAT` holds the in-game UI window frames, loaded by `MAIN.EXE`. The `三国志3_GRPDATA图形解析/` folder ships a full decoder (6× 80×112 frame variants + 1× 112×400 full-height frame; KOEI NPK-style compression, 8-color palette verified against in-game screenshots), format notes, and all rendered PNGs.
 
 **English**: The game content is actually 640×400 inside a 640×480 (VGA mode 12h) frame, with 40px black bars top and bottom. Two solutions are provided under `16x10去黑边方案/`:
 
