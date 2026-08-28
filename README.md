@@ -50,6 +50,10 @@
 │   ├─ decode_grpdata.py                     解码脚本（KOEI NPK 式压缩）
 │   ├─ grpdata_all_frames.png                全部图形总览
 │   └─ 渲染图/                               7 张帧图（4 倍放大）
+├─ 三国志3_MAPDATA解析/                      MAPDATA.DAT 地图数据（研究进度）
+│   ├─ README.md                             结构与逆向进度说明
+│   ├─ decode_mapdata.py                     解码脚本（3bpp/4bpp 候选）
+│   └─ 渲染图/                               多方案渲染图（供辨认/继续逆向）
 ├─ 三国志3武将列表_简体对照v4.xlsx           武将名/能力对照表（含简繁对照列）
 └─ 武将名简体化_思路与基础数据.md            武将名字体化定位思路与数据说明
 ```
@@ -91,6 +95,14 @@
 **中文**：`GRPDATA.DAT` 是游戏界面窗口图形（消息框/对话框边框），由 `MAIN.EXE` 加载。目录 `三国志3_GRPDATA图形解析/` 提供了完整解码：6 张 80×112 窗口框变体 + 1 张 112×400 全高框，KOEI NPK 式压缩、8 色调色板（已与游戏截图核对），含解码脚本、格式说明与全部渲染图。
 
 **English**: `GRPDATA.DAT` holds the in-game UI window frames, loaded by `MAIN.EXE`. The `三国志3_GRPDATA图形解析/` folder ships a full decoder (6× 80×112 frame variants + 1× 112×400 full-height frame; KOEI NPK-style compression, 8-color palette verified against in-game screenshots), format notes, and all rendered PNGs.
+
+---
+
+## MAPDATA.DAT 解析 / MAPDATA.DAT Research
+
+**中文**：`MAPDATA.DAT` 是地图数据文件（头 640×135 + KOEI NPK 式压缩流，可解出 1,758,996 像素）。`三国志3_MAPDATA解析/` 目录记录了当前逆向进度（3bpp/4bpp 两种位深候选、多种宽度与竖条重组渲染），显示宽度与调色板映射尚未最终确认，保留全部渲染图供继续研究。
+
+**English**: `MAPDATA.DAT` is the map data file (header 640×135 + KOEI NPK-style stream decompressing to 1,758,996 pixels). The `三国志3_MAPDATA解析/` folder documents the current RE progress (3bpp/4bpp candidates, multiple widths and strip-reassembly renders); the display width and palette mapping are not finalized yet, and all renders are kept for further work.
 
 **English**: The game content is actually 640×400 inside a 640×480 (VGA mode 12h) frame, with 40px black bars top and bottom. Two solutions are provided under `16x10去黑边方案/`:
 
