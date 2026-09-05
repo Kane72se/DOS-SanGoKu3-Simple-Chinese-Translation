@@ -3,13 +3,13 @@
 
 ![test0000](test0000.jpg)
 
-## 🆕 高清头像浮层 san3overlay（新增）
+## 🆕 高清头像浮层 三国志3_头像（新增）
 
 在 DOSBox-X / PCem 里玩 DOS 版《三国志3》时，用透明置顶浮层把游戏里 64×80 的 8 色头像**原位替换**成 Windows 版 256 色高清头像。支持多目标（DOSBox-X / PCem）、前台自动隐藏、同屏多头像替换、跟随窗口/DPI 缩放、按模拟器分别校调。
 
-![san3overlay 效果：PCem 里公孙瓒高清头像](san3overlay/screenshot_PCem_公孙瓒.png)
+![三国志3_头像 效果：PCem 里公孙瓒高清头像](三国志3_头像/screenshot_PCem_公孙瓒.png)
 
-见 **[san3overlay/](san3overlay/)** 目录（含主程序、307 张 DOS 参考脸、307 张 Windows 高清脸、config 与详细说明）。
+见 **[三国志3_头像/](三国志3_头像/)** 目录（含主程序、307 张 DOS 参考脸、307 张 Windows 高清脸、config、中英文 README 与效果截图）。
 
 > 关键逆向：DOS 版 `KAODATA.DAT`（307 张 64×80/8 色位平面）与 Windows 版 `FACES.BMP`（768×4160，0–306 专用脸、307–311 空槽、312–622 大众脸）**专用脸同序同人**，编号直接对齐；用 `PrintWindow` 抓帧 + 多尺度模板匹配定位，高清脸原位替换。
 

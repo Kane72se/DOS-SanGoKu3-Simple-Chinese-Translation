@@ -1,8 +1,12 @@
-# 三国志3（DOS）高清头像浮层 —— san3overlay
+# 三国志3（DOS）高清头像浮层 —— 三国志3_头像
+
+> 🌐 [English README](README.en.md)
 
 在 DOSBox-X / PCem 里玩 DOS 版《三国志3》时，用一个透明置顶浮层把游戏里 64×80、8 色的头像，**原位替换**成 Windows 版 256 色的高清头像。
 
 ![效果：PCem 里公孙瓒的高清头像覆盖在游戏原头像上](screenshot_PCem_公孙瓒.png)
+
+![DOS 原版 vs Windows 高清（四武将对比）](preview_4people.png)
 
 ## 概述
 - 支持 DOSBox-X 与 PCem 等模拟器（按窗口标题匹配，可逗号列多个目标）。
